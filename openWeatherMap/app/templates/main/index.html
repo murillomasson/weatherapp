@@ -41,10 +41,13 @@
         <div class="row align-items-high">
             <div class="col-lg-13">
                 <div class=" text-center">
+<h5></h5>
                     <h1>previsão do tempo</h1>
+                                                <h5>Murillo Masson</h5>
+
                     <img src="{% static '/images/clouds.png' %}" class="image" style="width:300px; margin-bottom:-100px;">
                 </div>
-                <div class="d-flex flex-column align-items-center pt-0 py-4">
+                <div class="d-flex flex-column align-items-center pt-0 py-5">
                     <div>
                         <nav class="navbar-expand navbar-dark bg-primary" id="bs-example-navbar-collapse-2">
                             <form method="post" class="col-md">
@@ -63,6 +66,7 @@
                     <form>
                         <br> <br>
                         <div class="row">
+
                             {% if total and date and current_temp and current_humidity and current_feels_like and current_weather_main and current_weather_icon %}
                             <div class="card-body mb- py-5">
                                 <div class="card-body">
@@ -72,8 +76,21 @@
                                         <h4>{{current_weather_main}}<img src="https://openweathermap.org/img/w/{{current_weather_icon}}.png" alt="Image" style="width:38px"></h4></div>
                                     <div class="badge-primary"><p>humidade do ar: {{current_humidity}}%</p></div>
                                     <div class="badge-primary"><p>sensação térmica: {{current_feels_like}}ºC</p></div>
-                                    {% endif %}
                                 </div>
+                            </div>
+                        </div>
+                        <h4>próximos dias:</h4>
+                        <div class="card-body mb- py-2">
+                            <div class="card-body">
+                                <dl>
+                                    {% for i in total.items %}
+                                    <div class="text-info">{{ i.0 }}:</div>
+                                    {% for g in i.1 %}
+                                    <dd>{{ g }}</dd>
+                                    {% endfor %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </dl>
                             </div>
                         </div>
                     </form>
