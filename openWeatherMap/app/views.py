@@ -3,7 +3,7 @@ import requests
 import json
 from datetime import datetime
 
-API_KEY = ''
+API_KEY = 'e264f9ab41b21d92ca4296b6b38aa1f4'
 lang = 'pt_br'
 
 def index(request):
@@ -14,6 +14,7 @@ def index(request):
                 f"https://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={API_KEY}&lang={lang}"
             ).text
         )
+        
         lat = str(geolocation[0]['lat'])
         lon = str(geolocation[0]['lon'])
         source = json.loads(
@@ -22,10 +23,12 @@ def index(request):
                 f"&appid={API_KEY}&lang={lang}&units=metric"
             ).text
         )
+        
         current_date = ''
         today = datetime.today()
         now = datetime.now().strftime("%H:%M")
-
+        total = {}
+        
         for item in source['list']:
             time = item['dt_txt']
             next_date, hour = time.split(' ')
@@ -41,9 +44,11 @@ def index(request):
                 y, m, d = current_date.split('-')
                 date = f'{d}/{m}/{y}'
 
-            total = ', '.join([date, temperature, weather_main])
+            total[date] = (temperature, weather_main)
 
         context = {
+            "date": date,
+            "temp": temp,
             "total": total,
             "today": today,
             "now": now,
