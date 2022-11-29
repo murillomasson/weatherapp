@@ -3,7 +3,7 @@
 *  e retorna dados da informações do tempo atual e temperatura para os próximos dias
 *  área para _cadastro de usuário_, que permite salvar consultas de cidades com informações do tempo sempre atualizadas
 
-para consultar em servidor, _acessar o deploy em:__
+para consultar em servidor, _acessar o deploy em:_
 
 https://murillomasson.pythonanywhere.com/
 
