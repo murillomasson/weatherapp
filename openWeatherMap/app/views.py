@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from .forms import UserForm, CityForm
 from .models import City
 
-API_KEY = 'e264f9ab41b21d92ca4296b6b38aa1f4'
+API_KEY = ''
 lang = 'pt_br'
 
 
