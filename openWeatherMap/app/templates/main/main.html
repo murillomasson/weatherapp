@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0" />
+       <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <title>Temperatura</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">tempo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">previsão do tempo
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://github.com/murillomasson">github
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://www.linkedin.com/in/murillomasson/">linkedin
+                    </a>
+                </li>
+				<li class="nav-item">
+                    <a class="nav-link active" href="/loginuser">login
+                    </a>
+                </li>
+                                <li class="nav-item">
+                    <a class="nav-link active" href="/registeruser">cadastro
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row align-items-high">
+            <div class="col-lg-13">
+                <div class=" text-center">
+					<h5></h5>
+					<h1>previsão do tempo</h1>
+					<div class="text-info">
+					<p>desenvolvido por: <b>Murillo Masson</b></p>
+					</div>
+					<meta charset="utf-8">
+					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+					<div class = "background">
+						<div class ="heading">
+							<img src="{% static '/images/clouds.png' %}" class="image" style="width:100px">
+                            {% if user.is_authenticated %}
+                            <div class="golink" align="center">
+                                <form action="{% url 'logout_user' %}">
+                                    <button class="btn-1 btn" type="submit">sair</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <section class="section">
+                            <h3 align="center" class="title is-4">bem-vindo, {{user.username}}!</h3>
+                            <div class="row">
+                                <div class="d-flex flex-column align-items-center">
+                                    <div class="col-6">
+                                        <div class="container">
+                                            <div class="columns">
+                                                <div class="column is-offset-4 is-4">
+                                                    <form method="POST" class="col-md">
+                                                        {% csrf_token %}
+                                                        <div class="row">
+                                                            <div class="field has-addons">
+                                                                <div class="control is-expanded">
+                                                                    {{ form.name }}
+                                                                </div>
+                                                                </div>
+                                                            <p></p>
+                                                                <div class="control">
+                                                                    <button class="button btn-secondary" name="city">
+                                                                        adicionar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+                    </div>
+                            <div class="container">
+                                <div class="col py-4">
+                                    <div class="column is-offset-4 is-4">
+                                        {% for weather in weather_data %}
+                                        <div class="box">
+                                            <article class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-50x50">
+                                                    </figure>
+                                                </div>
+                                                <div class="text-info">
+                                                    <h3><img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image" style="width:38px">
+                                                        {{ weather.city }}</h3></div>
+                                                <h4>{{ weather.temperature }}°C</h4>
+                                                <h5>{{ weather.description }}</h5>
+                                            </article>
+                                        </div>
+                                        <div class="delete">
+                                            <a href="{% url 'delete' weather.city %}">remover cidade</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
