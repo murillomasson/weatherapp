@@ -1,5 +1,5 @@
 🪢 app Django que
-*  consulta api de previsão do tempo em openWeatherAPI (get) a partir da cidade (post)
+*  consulta api de previsão do tempo em Open Weather Map (get) a partir da cidade (post)
 *  e retorna dados da informações do tempo atual e temperatura para os próximos dias
 *  área para _cadastro de usuário_, que permite salvar consultas de cidades com informações do tempo sempre atualizadas
 
